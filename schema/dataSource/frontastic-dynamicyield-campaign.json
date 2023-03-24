@@ -1,0 +1,19 @@
+{
+  "customDataSourceType": "frontastic/dynamicyield/campaign",
+  "name": "Campaign",
+  "category": "Content",
+  "icon": "group",
+  "schema": [
+    {
+      "name": "Dynamicyield Campaign",
+      "fields": [
+        {
+          "label": "Campaign ID",
+          "field": "campaignId",
+          "type": "string",
+          "translatable": false
+        }
+      ]
+    }
+  ]
+}
