@@ -1,15 +1,26 @@
+import {Request} from '@frontastic/extension-types';
 
-import { Context } from '@frontastic/extension-types';
 
 export default class CampaignApi {
-  private client: any;
-  private locale: string;
 
-  constructor(frontasticContext: Context, locale?: string) {
+  constructor() {
 
   }
 
-  private formatLocale(locale: string) {
-    return locale.replace('_', '-');
+
+  getDyContext(req: Request) {
+    const dyContext = {
+      page: {
+        location: `https://${req?.hostname}${req?.path}`,
+        referrer: req.headers.referer || '',
+        data: [],
+      },
+      device: {
+        userAgent: req?.headers['user-agent'] || '',
+        ip: req?.clientIp,
+      },
+      pageAttributes: req?.query,
+    }
+    return dyContext
   }
 }
