@@ -8,8 +8,8 @@
       "name": "Dynamicyield Campaign",
       "fields": [
         {
-          "label": "Campaign ID",
-          "field": "campaignId",
+          "label": "Campaign Selector Name",
+          "field": "campaignSelectorName",
           "type": "string",
           "translatable": false
         }
