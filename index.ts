@@ -13,6 +13,8 @@ export default {
         campaignSelectorName
       ]
       const result = await campaignApi.choose(userId, sessionId, dyContext,selector )
+      console.log("DY result : #####################")
+      console.log(result)
       return {
         dataSourcePayload: result
       }

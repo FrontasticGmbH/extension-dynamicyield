@@ -20,8 +20,7 @@ export default class CampaignApi {
       },
       context : dyContext
     }
-    console.log('%%%%%%%%%%%%')
-    console.log(body)
+
     const url = `https://dy-api.com/v2/serve/user/choose`
     const
       headers=  {
