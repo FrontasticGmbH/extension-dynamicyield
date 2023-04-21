@@ -1,22 +1,32 @@
 import { DataSourceConfiguration, DataSourceContext, ExtensionRegistry } from '@frontastic/extension-types';
 import CampaignApi from './apis/CampaignApi';
+import { Product } from '@Types/content/dynamicyield/Product';
+import { DynamicYieldMapper } from './mappers/DynamicYieldMapper';
+import { getContext } from './utils/Request';
 
 export default {
   'data-sources': {
     'frontastic/dynamicyield/product-recommendations-campaign': async (config: DataSourceConfiguration, context: DataSourceContext) => {
-      const campaignApi = new CampaignApi();
-      const dyContext = campaignApi.getDyContext(context.request);
-      const sessionId = context.request?.sessionData?.cartId
-      const userId = context.request?.clientIp
-      const campaignSelectorName = config?.configuration?.campaignSelectorName
+
+      const campaignApi : CampaignApi = new CampaignApi(context.frontasticContext);
+      const dyContext : any = getContext(context.request);
+      const sessionId : string = context.request?.sessionData?.cartId
+      const userId : string = context.request?.clientIp
+      const campaignSelectorName : string = config?.configuration?.campaignSelectorName
       const selector = [
         campaignSelectorName
       ]
-      const result = await campaignApi.choose(userId, sessionId, dyContext,selector )
-      console.log("DY result : #####################")
-      console.log(result)
+
+      let items : Product[]
+
+      try {
+        const result = await campaignApi.choose(userId, sessionId, dyContext,selector )
+        items = DynamicYieldMapper.mapChooseResponseToProducts(result)
+      } catch (err) {
+        console.error(err)
+      }
       return {
-        dataSourcePayload: result
+        dataSourcePayload: { items }
       }
     },
   },
