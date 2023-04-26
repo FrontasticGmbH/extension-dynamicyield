@@ -33,7 +33,7 @@ export const getContext = (request: Request) =>  {
     page: {
       location: `https://${hostname}${path}`,
       referrer: referrer || '',
-      type : 'homepage',
+      type : 'PRODUCT',
       data
     },
     device: {
