@@ -16,7 +16,7 @@ export const getLocale = (request?: Request): string | null => {
   return null;
 };
 
-export const getContext = (request: Request) =>  {
+export const getContext = (request: Request, pageContextType : string) =>  {
   const referrer : string | undefined = getHeader(request, 'referrer')
   const userAgent : string | undefined = getHeader(request, 'userAgent')
 
@@ -26,14 +26,11 @@ export const getContext = (request: Request) =>  {
   const path : string = getPath(request)
   const query : string = request?.query
 
-  console.log('request query path ')
-  console.log(path)
-
   const dyContext = {
     page: {
       location: `https://${hostname}${path}`,
       referrer: referrer || '',
-      type : 'PRODUCT',
+      type : 'HOMEPAGE',
       data
     },
     device: {

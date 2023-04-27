@@ -5,11 +5,17 @@
   "icon": "group",
   "schema": [
     {
-      "name": "Dynamicyield Campaign",
+      "name": "Configuration",
       "fields": [
         {
           "label": "Campaign Selector Name",
           "field": "campaignSelectorName",
+          "type": "string",
+          "translatable": false
+        },
+        {
+          "label": "Page Context Type",
+          "field": "pageContextType",
           "type": "string",
           "translatable": false
         }

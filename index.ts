@@ -26,7 +26,8 @@ export default {
     'frontastic/dynamicyield/product-recommendations-campaign': async (config: DataSourceConfiguration, context: DataSourceContext) => {
 
       const campaignApi : CampaignApi = new CampaignApi(context.frontasticContext);
-      const dyContext : any = getContext(context.request);
+      const pageContextType : string = config?.configuration?.pageContextType
+      const dyContext : any = getContext(context.request, pageContextType);
       let cartId : string = context.request?.sessionData?.cartId
       if (!cartId) {
         cartId = await createCartId(context)
@@ -34,14 +35,16 @@ export default {
 
       const userId : string = context.request?.clientIp
       const campaignSelectorName : string = config?.configuration?.campaignSelectorName
+
       const selector = [
         campaignSelectorName
       ]
 
       let items : Product[]
-
+      console.log("###########################")
+      console.log(dyContext)
       try {
-        const result = await campaignApi.choose(userId, cartId, dyContext,selector )
+        const result = await campaignApi.choose(userId, cartId, dyContext, selector )
 
         items = DynamicYieldMapper.mapChooseResponseToProducts(result)
       } catch (err) {
