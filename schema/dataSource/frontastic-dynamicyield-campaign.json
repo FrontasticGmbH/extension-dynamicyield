@@ -1,6 +1,6 @@
 {
-  "customDataSourceType": "frontastic/dynamicyield/campaign",
-  "name": "Campaign",
+  "customDataSourceType": "dynamicyield/product-recommendations-campaign",
+  "name": "Product Recommendations Campaign",
   "category": "Content",
   "icon": "group",
   "schema": [

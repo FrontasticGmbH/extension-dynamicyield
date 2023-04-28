@@ -23,7 +23,7 @@ async function createCartId(context : DataSourceContext) {
 
 export default {
   'data-sources': {
-    'frontastic/dynamicyield/product-recommendations-campaign': async (config: DataSourceConfiguration, context: DataSourceContext) => {
+    'dynamicyield/product-recommendations-campaign': async (config: DataSourceConfiguration, context: DataSourceContext) => {
 
       const campaignApi : CampaignApi = new CampaignApi(context.frontasticContext);
       const pageContextType : string = config?.configuration?.pageContextType
@@ -41,8 +41,6 @@ export default {
       ]
 
       let items : Product[]
-      console.log("###########################")
-      console.log(dyContext)
       try {
         const result = await campaignApi.choose(userId, cartId, dyContext, selector )
 
