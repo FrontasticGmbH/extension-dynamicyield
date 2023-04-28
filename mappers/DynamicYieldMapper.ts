@@ -1,4 +1,3 @@
-
 import {Product} from "../../../types/content/dynamicyield/Product";
 import {Money} from "../../../types/content/dynamicyield/Money";
 
@@ -11,7 +10,6 @@ export class DynamicYieldMapper {
     const slots = variation?.payload?.data?.slots
 
     slots.forEach(item => {
-      console.log(item?.productData)
       const price : Money = {
         fractionDigits : 2,
         centAmount: item?.productData?.price

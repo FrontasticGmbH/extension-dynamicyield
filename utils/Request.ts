@@ -39,7 +39,6 @@ export const getContext = (request: Request, pageContextType : string) =>  {
     },
     pageAttributes: query,
   }
-  console.log(dyContext)
   return dyContext
 }
 

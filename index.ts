@@ -53,6 +53,4 @@ export default {
       }
     },
   },
-
-
 } as ExtensionRegistry;

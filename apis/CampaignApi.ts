@@ -50,7 +50,7 @@ export default class CampaignApi {
 
 
     } catch (e) {
-      console.log(e)
+      console.error(e)
     }
     return resultBody;
   }
