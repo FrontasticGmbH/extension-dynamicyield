@@ -12,35 +12,34 @@ export const getLocale = (request?: Request): string | null => {
       return getHeader(request, 'frontastic-locale') ?? request.query.locale;
     }
   }
-
   return null;
 };
 
-export const getContext = (request: Request, pageContextType : string) =>  {
-  const referrer : string | undefined = getHeader(request, 'referrer')
-  const userAgent : string | undefined = getHeader(request, 'userAgent')
+export const getContext = (request: Request, pageContextType: string) => {
+  const referrer: string | undefined = getHeader(request, 'referrer');
+  const userAgent: string | undefined = getHeader(request, 'userAgent');
 
-  const ip : string = request?.clientIp
-  const data : any[] = []
-  const hostname : string = request?.hostname
-  const path : string = getPath(request)
-  const query : string = request?.query
+  const ip: string = request?.clientIp;
+  const data: any[] = [];
+  const hostname: string = request?.hostname;
+  const path: string = getPath(request);
+  const query: string = request?.query;
 
   const dyContext = {
     page: {
       location: `https://${hostname}${path}`,
       referrer: referrer || '',
-      type : 'HOMEPAGE',
-      data
+      type: 'HOMEPAGE',
+      data,
     },
     device: {
-      userAgent : userAgent || '',
-      ip
+      userAgent: userAgent || '',
+      ip,
     },
     pageAttributes: query,
-  }
-  return dyContext
-}
+  };
+  return dyContext;
+};
 
 const getHeader = (request: Request, header: string): string | null => {
   if (request.headers && header in request.headers) {
