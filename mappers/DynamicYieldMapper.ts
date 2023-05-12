@@ -18,6 +18,7 @@ export class DynamicYieldMapper {
         sku: slotItem?.sku,
         name: slotItem?.productData?.name,
         description: slotItem?.productData?.description,
+        url: slotItem?.productData?.url,
         imageUrl: slotItem?.productData?.image_url,
         categories: slotItem?.productData?.categories,
         productType: slotItem?.productData?.group_id,
