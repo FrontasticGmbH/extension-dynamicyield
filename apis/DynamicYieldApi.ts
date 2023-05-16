@@ -1,23 +1,8 @@
 // @ts-ignore
 import fetch from 'node-fetch';
-import { Context } from '@frontastic/extension-types';
+import BaseApi from './BaseApi';
 
-export default class CampaignApi {
-  private dyClient: any;
-  constructor(frontasticContext: Context) {
-    this.dyClient = this.createDyClient(frontasticContext);
-  }
-
-  createDyClient(frontasticContext: Context) {
-    const configuration = frontasticContext.project.configuration;
-    const dyConfiguration = configuration?.dynamicyield;
-    const dyClient = {
-      apiKey: dyConfiguration?.apiKey,
-      url: `${dyConfiguration?.host}/v2/serve/user/choose`,
-    };
-    return dyClient;
-  }
-
+export default class DynamicYieldApi extends BaseApi {
   async choose(userId: any, sessionId: any, dyContext: any, selectors: any[] = []) {
     const body = {
       selector: {
@@ -32,14 +17,14 @@ export default class CampaignApi {
       context: dyContext,
     };
     const headers = {
-      'dy-api-key': this.dyClient.apiKey,
+      'dy-api-key': this.getDyClient().apiKey,
       'Content-Type': 'application/json',
     };
 
     let response: any = {};
     let resultBody: any = {};
     try {
-      response = await fetch(this.dyClient.url, {
+      response = await fetch(this.getDyClient().url, {
         method: 'post',
         body: JSON.stringify(body),
         headers,

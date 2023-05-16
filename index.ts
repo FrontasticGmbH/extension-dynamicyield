@@ -1,5 +1,5 @@
 import { DataSourceConfiguration, DataSourceContext, ExtensionRegistry } from '@frontastic/extension-types';
-import CampaignApi from './apis/CampaignApi';
+import DynamicYieldApi from './apis/DynamicYieldApi';
 import { Product } from '@Types/content/dynamicyield/Product';
 import { DynamicYieldMapper } from './mappers/DynamicYieldMapper';
 import { getContext } from './utils/Request';
@@ -27,7 +27,7 @@ export default {
       config: DataSourceConfiguration,
       context: DataSourceContext,
     ) => {
-      const campaignApi: CampaignApi = new CampaignApi(context.frontasticContext);
+      const dyApi: DynamicYieldApi = new DynamicYieldApi(context.frontasticContext);
       const pageContextType: string = config?.configuration?.pageContextType;
       const dyContext: any = getContext(context.request, pageContextType);
       let cartId: string = context.request?.sessionData?.cartId;
@@ -42,7 +42,7 @@ export default {
 
       let items: Product[];
       try {
-        const result = await campaignApi.choose(userId, cartId, dyContext, selector);
+        const result = await dyApi.choose(userId, cartId, dyContext, selector);
         items = DynamicYieldMapper.mapChooseResponseToProducts(result);
       } catch (err) {
         console.error(err);
