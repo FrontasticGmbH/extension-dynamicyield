@@ -42,7 +42,7 @@ export default {
 
       let items: Product[];
       try {
-        const items = await dyApi.choose(userId, cartId, dyContext, selector);
+        items = await dyApi.choose(userId, cartId, dyContext, selector);
       } catch (err) {
         console.error(err);
       }
