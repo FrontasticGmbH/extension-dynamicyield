@@ -42,8 +42,7 @@ export default {
 
       let items: Product[];
       try {
-        const result = await dyApi.choose(userId, cartId, dyContext, selector);
-        items = DynamicYieldMapper.mapChooseResponseToProducts(result);
+        const items = await dyApi.choose(userId, cartId, dyContext, selector);
       } catch (err) {
         console.error(err);
       }
