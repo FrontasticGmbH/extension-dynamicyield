@@ -17,7 +17,7 @@ function getCartApi(request: Request, actionContext: ActionContext) {
 async function createCartId(context: DataSourceContext) {
   const request = context.request;
   const cartApi = getCartApi(request, context);
-  let cart = await CartFetcher.fetchCart(cartApi, request, context);
+  const cart = await CartFetcher.fetchCart(cartApi, request, context);
   const cartId = cart.cartId;
   return cartId;
 }
