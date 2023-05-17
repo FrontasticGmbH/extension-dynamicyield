@@ -1,4 +1,5 @@
 import { Request } from '@frontastic/extension-types';
+import { ContextType } from '@Types/content/dynamicyield/ContextType';
 
 export const getPath = (request: Request): string | null => {
   return getHeader(request, 'frontastic-path') ?? request.query.path;
@@ -15,7 +16,7 @@ export const getLocale = (request?: Request): string | null => {
   return null;
 };
 
-export const getContext = (request: Request, pageContextType: string) => {
+export const getContext = (request: Request, pageContextType: string): ContextType => {
   const referrer: string | undefined = getHeader(request, 'referrer');
   const userAgent: string | undefined = getHeader(request, 'userAgent');
 
@@ -29,7 +30,7 @@ export const getContext = (request: Request, pageContextType: string) => {
     page: {
       location: `https://${hostname}${path}`,
       referrer: referrer || '',
-      type: 'HOMEPAGE',
+      type: pageContextType,
       data,
     },
     device: {
