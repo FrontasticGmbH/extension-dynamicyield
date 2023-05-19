@@ -1,10 +1,45 @@
-import { Money } from '../../../types/content/dynamicyield/Money';
-import { Product } from '../../../types/content/dynamicyield/Product';
-import { Slot } from '../../../types/content/dynamicyield/Slot';
+import { Money } from '../../../types/product/Money';
+import { Product } from '../../../types/product/Product';
+import { Variant } from '../../../types/product/Variant';
+import { Category } from '../../../types/product/Category';
+
+export interface Slot {
+  sku: string;
+  productData: {
+    price: number;
+    name: string;
+    description: string;
+    url: string;
+    image_url: string;
+    categories: any;
+    group_id: string;
+  };
+}
 
 export class DynamicYieldMapper {
+  private static mapToVariants(slotItem: Slot, price: Money): Variant[] {
+    const variants: Variant[] = [];
+    const variant: Variant = {
+      sku: slotItem?.sku,
+      price: price,
+      groupId: slotItem?.productData?.group_id,
+      images: [slotItem?.productData?.image_url],
+    };
+    variants.push(variant);
+    return variants;
+  }
+
+  private static mapToCategories(slotItem: Slot): Category[] {
+    const categories: Category[] = [];
+    const category: Category = {
+      name: slotItem?.productData?.categories,
+    };
+    categories.push(category);
+    return categories;
+  }
+
   static mapChooseResponseToProducts(result: any): Product[] {
-    const products: any = [];
+    const products: Product[] = [];
     const resultJson = JSON.parse(result);
     const variation = resultJson?.choices[0]?.variations[0];
     const slots = variation?.payload?.data?.slots;
@@ -13,16 +48,14 @@ export class DynamicYieldMapper {
         fractionDigits: 2,
         centAmount: slotItem?.productData?.price,
       };
-
+      const variants: Variant[] = this.mapToVariants(slotItem, price);
+      const categories: Category[] = this.mapToCategories(slotItem);
       const product: Product = {
-        sku: slotItem?.sku,
         name: slotItem?.productData?.name,
         description: slotItem?.productData?.description,
-        url: slotItem?.productData?.url,
-        imageUrl: slotItem?.productData?.image_url,
-        categories: slotItem?.productData?.categories,
-        productType: slotItem?.productData?.group_id,
-        price: price,
+        _url: slotItem?.productData?.url,
+        categories,
+        variants,
       };
       products.push(product);
     });

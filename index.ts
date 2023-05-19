@@ -1,14 +1,12 @@
 import { DataSourceConfiguration, DataSourceContext, ExtensionRegistry } from '@frontastic/extension-types';
 import DynamicYieldApi from './apis/DynamicYieldApi';
-import { Product } from '@Types/content/dynamicyield/Product';
-import { DynamicYieldMapper } from './mappers/DynamicYieldMapper';
+import { Product } from '@Types/product/Product';
 import { getContext } from './utils/Request';
 import { Request } from '@frontastic/extension-types';
 import { CartFetcher } from '@Commerce-commercetools/utils/CartFetcher';
 import { ActionContext } from '@frontastic/extension-types';
 import { CartApi } from '@Commerce-commercetools/apis/CartApi';
 import { getLocale } from '@Commerce-commercetools/utils/Request';
-import { ContextType } from '@Types/content/dynamicyield/ContextType';
 
 function getCartApi(request: Request, actionContext: ActionContext) {
   return new CartApi(actionContext.frontasticContext, getLocale(request));
@@ -30,7 +28,7 @@ export default {
     ) => {
       const dyApi: DynamicYieldApi = new DynamicYieldApi(context.frontasticContext);
       const pageContextType: string = config?.configuration?.pageContextType;
-      const dyContext: ContextType = getContext(context.request, pageContextType);
+      const dyContext = getContext(context.request, pageContextType);
       let cartId: string = context.request?.sessionData?.cartId;
       if (!cartId) {
         cartId = await createCartId(context);

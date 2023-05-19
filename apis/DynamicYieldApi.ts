@@ -2,7 +2,7 @@
 import fetch from 'node-fetch';
 import BaseApi from './BaseApi';
 import { DynamicYieldMapper } from '@Content-dynamicyield/mappers/DynamicYieldMapper';
-import { Product } from '../../../types/content/dynamicyield/Product';
+import { Product } from '../../../types/product/Product';
 
 export default class DynamicYieldApi extends BaseApi {
   async choose(userId: any, sessionId: any, dyContext: any, selectors: any[] = []): Promise<Product[]> {

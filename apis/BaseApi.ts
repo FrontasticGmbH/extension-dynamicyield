@@ -1,6 +1,10 @@
 // @ts-ignore
 import { Context } from '@frontastic/extension-types';
-import { Client } from '../../../types/content/dynamicyield/Client';
+
+interface Client {
+  apiKey: string;
+  url: string;
+}
 
 export default class BaseApi {
   private dyClient: Client;

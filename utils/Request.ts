@@ -1,6 +1,20 @@
 import { Request } from '@frontastic/extension-types';
 import { ContextType } from '@Types/content/dynamicyield/ContextType';
 
+interface ContextType {
+  page: {
+    location: string;
+    referrer: string;
+    type: string;
+    data: any[];
+  };
+  device: {
+    userAgent: string;
+    ip: string;
+  };
+  pageAttributes: string;
+}
+
 export const getPath = (request: Request): string | null => {
   return getHeader(request, 'frontastic-path') ?? request.query.path;
 };
