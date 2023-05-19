@@ -1,5 +1,4 @@
 import { Request } from '@frontastic/extension-types';
-import { ContextType } from '@Types/content/dynamicyield/ContextType';
 
 interface ContextType {
   page: {
