@@ -5,7 +5,9 @@ import { DynamicYieldMapper } from '@Content-dynamicyield/mappers/DynamicYieldMa
 import { Product } from '../../../types/product/Product';
 
 export default class DynamicYieldApi extends BaseApi {
-  async choose(userId: any, sessionId: any, dyContext: any, selectors: any[] = []): Promise<Product[]> {
+  async choose(dyContext: any, selectors: any[] = []): Promise<Product[]> {
+    const userId = this.getUserId();
+    const sessionId = this.getSessionId();
     const body = {
       selector: {
         names: selectors,
