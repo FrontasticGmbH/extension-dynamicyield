@@ -3,6 +3,7 @@ import fetch from 'node-fetch';
 import BaseApi from './BaseApi';
 import { DynamicYieldMapper } from '@Content-dynamicyield/mappers/DynamicYieldMapper';
 import { Product } from '../../../types/product/Product';
+import { ExternalError } from '@Commerce-commercetools/utils/Errors';
 
 export default class DynamicYieldApi extends BaseApi {
   async choose(dyContext: any, selectors: any[] = []): Promise<Product[]> {
@@ -35,10 +36,10 @@ export default class DynamicYieldApi extends BaseApi {
         headers,
       });
       resultBody = JSON.stringify(await response.json());
-      items = DynamicYieldMapper.mapChooseResponseToProducts(resultBody);
-    } catch (e) {
-      console.error(e);
+    } catch (error: any) {
+      throw new ExternalError({ status: error.code, message: error.message, body: error.body });
     }
+    items = DynamicYieldMapper.mapChooseResponseToProducts(resultBody);
     return items;
   }
 }
