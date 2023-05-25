@@ -37,12 +37,7 @@ export default {
         });
       }
       const selector = [campaignSelectorName];
-      let items: Product[];
-      try {
-        items = await dyApi.choose(dyContext, selector);
-      } catch (err) {
-        console.error(err);
-      }
+      const items: Product[] = await dyApi.choose(dyContext, selector);
       return {
         dataSourcePayload: { items },
       };
