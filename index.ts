@@ -31,9 +31,12 @@ export default {
       const dyContext = getContext(context.request, pageContextType);
 
       const campaignSelectorName: string = config?.configuration?.campaignSelectorName;
-
+      if (!campaignSelectorName) {
+        throw new ValidationError({
+          message: `Dynamicyield campaign selector name is not defined in configuration ${config}`,
+        });
+      }
       const selector = [campaignSelectorName];
-
       let items: Product[];
       try {
         items = await dyApi.choose(dyContext, selector);

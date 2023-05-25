@@ -6,7 +6,7 @@ import { Product } from '../../../types/product/Product';
 import { ExternalError } from '@Commerce-commercetools/utils/Errors';
 
 export default class DynamicYieldApi extends BaseApi {
-  async choose(dyContext: any, selectors: any[] = []): Promise<Product[]> {
+  async choose(dyContext: any, selectors: string[] = []): Promise<Product[]> {
     const userId = this.getUserId();
     const sessionId = this.getSessionId();
     const body = {
