@@ -1,6 +1,6 @@
 import { Request } from '@frontastic/extension-types';
 
-interface ContextType {
+export interface ContextType {
   page: {
     location: string;
     referrer: string;

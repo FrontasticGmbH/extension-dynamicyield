@@ -4,9 +4,10 @@ import BaseApi from './BaseApi';
 import { DynamicYieldMapper } from '@Content-dynamicyield/mappers/DynamicYieldMapper';
 import { Product } from '../../../types/product/Product';
 import { ExternalError } from '@Content-dynamicyield/utils/Errors';
+import { ContextType } from '@Content-dynamicyield/utils/Request';
 
 export default class DynamicYieldApi extends BaseApi {
-  async choose(dyContext: any, selectors: string[] = []): Promise<Product[]> {
+  async choose(dyContext: ContextType, selectors: string[] = []): Promise<Product[]> {
     const userId = this.getUserId();
     const sessionId = this.getSessionId();
     const body = {
