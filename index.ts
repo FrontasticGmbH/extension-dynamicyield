@@ -9,6 +9,11 @@ export default {
       config: DataSourceConfiguration,
       context: DataSourceContext,
     ) => {
+      if (!context.hasOwnProperty('request')) {
+        throw new ValidationError({
+          message: `Request is not defined in context ${context}`,
+        });
+      }
       const userId: string = context.request?.clientIp;
       if (!userId) {
         throw new ValidationError({
