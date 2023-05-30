@@ -19,7 +19,7 @@ export class DynamicYieldMapper {
 
   private static mapToCategories(slotItem: Slot): Category[] {
     const categories: Category[] = [];
-    const categoriesText: string[] = slotItem?.productData?.categories;
+    const categoriesText = slotItem?.productData?.categories;
     categoriesText.forEach((categoryName) => {
       const category: Category = {
         name: categoryName,
