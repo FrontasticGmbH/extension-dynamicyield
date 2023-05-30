@@ -24,13 +24,13 @@ export const getContext = (request: Request, pageContextType: string): ContextTy
   const hostname: string = request?.hostname;
   const path: string = getPath(request);
   const query: string = request?.query;
-
+  const data: string[] = [];
   const dyContext = {
     page: {
       location: `https://${hostname}${path}`,
       referrer: referrer || '',
       type: pageContextType,
-      data: [],
+      data,
     },
     device: {
       userAgent: userAgent || '',

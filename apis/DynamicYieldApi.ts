@@ -27,19 +27,14 @@ export default class DynamicYieldApi extends BaseApi {
       'Content-Type': 'application/json',
     };
 
-    let response: any = {};
-    let resultBody: any = {};
-    let items: Product[] = [];
-    try {
-      response = await fetch(this.getDyClient().url, {
+    const resultBody =  await fetch(this.getDyClient().url, {
         method: 'post',
         body: JSON.stringify(body),
         headers,
-      });
-      resultBody = JSON.stringify(await response.json());
-      throw new ExternalError({ status: error.code, message: error.message, body: error.body });
-    }
-    items = DynamicYieldMapper.mapChooseResponseToProducts(resultBody);
+      }).then((response) => response.json())
+        .catch((error) => throw new ExternalError({ status: error.code, message: error.message, body: error.body }));
+    const stringifyResultBody = JSON.stringify(resultBody);
+    const items: Product[] = DynamicYieldMapper.mapChooseResponseToProducts(stringifyResultBody);
     return items;
   }
 }
