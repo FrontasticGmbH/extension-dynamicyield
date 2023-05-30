@@ -31,8 +31,8 @@ export default class DynamicYieldApi extends BaseApi {
         method: 'post',
         body: JSON.stringify(body),
         headers,
-      }).then((response) => response.json())
-        .catch((error) => throw new ExternalError({ status: error.code, message: error.message, body: error.body }));
+      }).then((response : any)  => response.json())
+        .catch((error : any) => throw new ExternalError({ status: error.code, message: error.message, body: error.body }));
     const stringifyResultBody = JSON.stringify(resultBody);
     const items: Product[] = DynamicYieldMapper.mapChooseResponseToProducts(stringifyResultBody);
     return items;
