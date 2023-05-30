@@ -2,19 +2,7 @@ import { Money } from '@Types/product/Money';
 import { Product } from '@Types/product/Product';
 import { Variant } from '@Types/product/Variant';
 import { Category } from '@Types/product/Category';
-
-export interface Slot {
-  sku: string;
-  productData: {
-    price: number;
-    name: string;
-    description: string;
-    url: string;
-    image_url: string;
-    categories: any;
-    group_id: string;
-  };
-}
+import { Slot } from '../interfaces/Slot';
 
 export class DynamicYieldMapper {
   private static mapToVariants(slotItem: Slot, price: Money): Variant[] {
@@ -31,10 +19,13 @@ export class DynamicYieldMapper {
 
   private static mapToCategories(slotItem: Slot): Category[] {
     const categories: Category[] = [];
-    const category: Category = {
-      name: slotItem?.productData?.categories,
-    };
-    categories.push(category);
+    const categoriesText = slotItem?.productData?.categories;
+    categoriesText.forEach((categoryName) => {
+      const category: Category = {
+        name: categoryName,
+      };
+      categories.push(category);
+    });
     return categories;
   }
 
