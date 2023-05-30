@@ -1,18 +1,5 @@
 import { Request } from '@frontastic/extension-types';
-
-export interface ContextType {
-  page: {
-    location: string;
-    referrer: string;
-    type: string;
-    data: any[];
-  };
-  device: {
-    userAgent: string;
-    ip: string;
-  };
-  pageAttributes: string;
-}
+import { ContextType } from '../interfaces/ContextType';
 
 export const getPath = (request: Request): string | null => {
   return getHeader(request, 'frontastic-path') ?? request.query.path;
@@ -34,7 +21,6 @@ export const getContext = (request: Request, pageContextType: string): ContextTy
   const userAgent: string | undefined = getHeader(request, 'userAgent');
 
   const ip: string = request?.clientIp;
-  const data: any[] = [];
   const hostname: string = request?.hostname;
   const path: string = getPath(request);
   const query: string = request?.query;
@@ -44,7 +30,7 @@ export const getContext = (request: Request, pageContextType: string): ContextTy
       location: `https://${hostname}${path}`,
       referrer: referrer || '',
       type: pageContextType,
-      data,
+      data: [],
     },
     device: {
       userAgent: userAgent || '',
