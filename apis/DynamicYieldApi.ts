@@ -2,7 +2,7 @@
 import fetch from 'node-fetch';
 import BaseApi from './BaseApi';
 import { DynamicYieldMapper } from '@Content-dynamicyield/mappers/DynamicYieldMapper';
-import { Product } from '../../../types/product/Product';
+import { Product } from '@Types/product/Product';
 import { ExternalError } from '@Content-dynamicyield/utils/Errors';
 import { ContextType } from '@Content-dynamicyield/utils/Request';
 
