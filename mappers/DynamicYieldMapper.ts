@@ -1,7 +1,7 @@
-import { Money } from '../../../types/product/Money';
-import { Product } from '../../../types/product/Product';
-import { Variant } from '../../../types/product/Variant';
-import { Category } from '../../../types/product/Category';
+import { Money } from '@Types/product/Money';
+import { Product } from '@Types/product/Product';
+import { Variant } from '@Types/product/Variant';
+import { Category } from '@Types/product/Category';
 
 export interface Slot {
   sku: string;
