@@ -14,13 +14,19 @@ export default {
           message: `Request is not defined in context ${context}`,
         });
       }
-      const userId: string = context.request?.clientIp;
+      const userId: string = context.request?.query?.dyId;
+      const sessionId: string = context.request?.query?.dySessionId;
       if (!userId) {
         throw new ValidationError({
-          message: `Client IP is not defined in context request ${context.request}`,
+          message: `dyId user ID is not defined in request query ${JSON.stringify(context.request?.query)}`,
         });
       }
-      const dyApi: DynamicYieldApi = new DynamicYieldApi(context.frontasticContext, userId);
+      if (!sessionId) {
+        throw new ValidationError({
+          message: `dySessionId is not defined in request query ${JSON.stringify(context.request?.query)}`,
+        });
+      }
+      const dyApi: DynamicYieldApi = new DynamicYieldApi(context.frontasticContext, userId, sessionId);
       const pageContextType: string = config?.configuration?.pageContextType;
       if (!pageContextType) {
         throw new ValidationError({
